@@ -12,7 +12,7 @@ file=$1
 
 function main {
   bib=`bibliography`
-  echo "$bib" > references.log
+  echo "$bib" > output/references.log
   log_duplicates "$bib"
   txt=`content`
   find_bib_refs_in_content "$bib" "$txt"
@@ -48,7 +48,7 @@ function content {
 }
 
 function find_bib_refs_in_content {
-  > matches.log
+  > output/matches.log
   for ref in $1; do
     name=`echo "$ref" | cut -d, -f1`
     year=`echo "$ref" | cut -d, -f2`
@@ -57,8 +57,8 @@ function find_bib_refs_in_content {
     if [ -z "$result" ]; then
       echo "Could not find $ref referenced in content" 1>&2
     else
-      echo "$ref:" >> matches.log
-      echo "$result" | sed "s/^/    /" >> matches.log
+      echo "$ref:" >> output/matches.log
+      echo "$result" | sed "s/^/    /" >> output/matches.log
     fi
   done
 }
