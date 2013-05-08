@@ -71,4 +71,3 @@ function find_content_refs_in_bib {
 
 main
 
-
